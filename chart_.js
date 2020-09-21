@@ -119,10 +119,21 @@ var show = (d) => {
     var msg = '';
     ["Title","Experience"]//,"FragmentID","NarrID","Are you related to/do you know either the victim or the perpetrator?","How is the victim related to the perpetrator?","What is the age category of the victim?","2.5 What is the gender of the perpetrator?","2.6 Where did this situation happen?","2.6 Other","2.8 Where did this situation happen?","3.1 Did you act/do something about this situation?","3.5 Have you contacted any services about this situation?","3.5 Other","4.1 The outcome of this situation for the victim was…","4.2 Situations like these…","5.1 If you were to witness a similar situation in the future you would…","6.5 Education","6.1 Gender","6.2 Age","6.6 Marital status","6.3 Ethnicity","6.3 Other","6.7 Monthly income","6.4 Attendance of religious services","6.8 Region of residence","6.11 Region originally from","6.11 Other","6.9 Residence","6.10 How long have you lived here for?"]
         .forEach(m => {
-        msg += m + ': ' + d.data[m] + '\n'
+        msg += m + ': ' + d.data[m] + '<br><br>'
     })
-    alert(msg)
+    alert_(msg)
     // console.log(d)
+}
+
+document.getElementById('pop-close').addEventListener('click', () => {
+    document.getElementById('pop-cont').style.display = "none"
+    out()
+})
+
+const alert_ = (msg) => {
+    document.getElementById('pop-inner').innerHTML = msg
+
+    document.getElementById('pop-cont').style.display = "flex" 
 }
      
 var hover = (d) => {
@@ -155,6 +166,7 @@ var hover = (d) => {
                     
 }
 var out = (d) => {
+    if(document.getElementById('pop-cont').style.display == 'flex') return;
     d3.selectAll(".line").style('opacity', .9).style('stroke-width', .7);
     opts = document.getElementsByClassName('select-option')
     for(var optIndex = 0; optIndex < opts.length; optIndex++){
